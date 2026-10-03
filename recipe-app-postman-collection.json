@@ -1,0 +1,96 @@
+{
+  "info": {
+    "name": "Recipe Recommendation API",
+    "description": "Collection for testing the Recipe Recommendation Spring Boot REST API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:8080", "type": "string" },
+    { "key": "recipeId", "value": "1", "type": "string" },
+    { "key": "ingredientId", "value": "1", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Recipes",
+      "item": [
+        {
+          "name": "Get All Recipes",
+          "request": { "method": "GET", "header": [],
+            "url": { "raw": "{{baseUrl}}/api/recipes", "host": ["{{baseUrl}}"], "path": ["api", "recipes"] } }
+        },
+        {
+          "name": "Get Recipe By Id",
+          "request": { "method": "GET", "header": [],
+            "url": { "raw": "{{baseUrl}}/api/recipes/{{recipeId}}", "host": ["{{baseUrl}}"], "path": ["api", "recipes", "{{recipeId}}"] } }
+        },
+        {
+          "name": "Create Recipe",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Veggie Omelette\",\n  \"cuisine\": \"American\",\n  \"difficulty\": \"EASY\",\n  \"cookingTimeMinutes\": 10,\n  \"instructions\": \"Whisk eggs, add veggies, cook on low heat until set.\",\n  \"ingredients\": [\n    { \"ingredientName\": \"egg\", \"quantity\": \"3\" },\n    { \"ingredientName\": \"onion\", \"quantity\": \"1/2\" },\n    { \"ingredientName\": \"bell pepper\", \"quantity\": \"1/2\" },\n    { \"ingredientName\": \"cheese\", \"quantity\": \"1/4 cup\" }\n  ]\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/recipes", "host": ["{{baseUrl}}"], "path": ["api", "recipes"] }
+          }
+        },
+        {
+          "name": "Update Recipe",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Veggie Omelette (updated)\",\n  \"cuisine\": \"American\",\n  \"difficulty\": \"EASY\",\n  \"cookingTimeMinutes\": 12,\n  \"instructions\": \"Whisk eggs, add veggies, cook on low heat until set.\",\n  \"ingredients\": [\n    { \"ingredientName\": \"egg\", \"quantity\": \"3\" },\n    { \"ingredientName\": \"cheese\", \"quantity\": \"1/2 cup\" }\n  ]\n}"
+            },
+            "url": { "raw": "{{baseUrl}}/api/recipes/{{recipeId}}", "host": ["{{baseUrl}}"], "path": ["api", "recipes", "{{recipeId}}"] }
+          }
+        },
+        {
+          "name": "Delete Recipe",
+          "request": { "method": "DELETE", "header": [],
+            "url": { "raw": "{{baseUrl}}/api/recipes/{{recipeId}}", "host": ["{{baseUrl}}"], "path": ["api", "recipes", "{{recipeId}}"] } }
+        }
+      ]
+    },
+    {
+      "name": "Ingredients",
+      "item": [
+        {
+          "name": "Get All Ingredients",
+          "request": { "method": "GET", "header": [],
+            "url": { "raw": "{{baseUrl}}/api/ingredients", "host": ["{{baseUrl}}"], "path": ["api", "ingredients"] } }
+        },
+        {
+          "name": "Create Ingredient",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"name\": \"basil\"\n}" },
+            "url": { "raw": "{{baseUrl}}/api/ingredients", "host": ["{{baseUrl}}"], "path": ["api", "ingredients"] }
+          }
+        },
+        {
+          "name": "Delete Ingredient",
+          "request": { "method": "DELETE", "header": [],
+            "url": { "raw": "{{baseUrl}}/api/ingredients/{{ingredientId}}", "host": ["{{baseUrl}}"], "path": ["api", "ingredients", "{{ingredientId}}"] } }
+        }
+      ]
+    },
+    {
+      "name": "Recommendations",
+      "item": [
+        {
+          "name": "Recommend Recipes",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"availableIngredients\": [\"egg\", \"cheese\", \"onion\"]\n}" },
+            "url": { "raw": "{{baseUrl}}/api/recommendations", "host": ["{{baseUrl}}"], "path": ["api", "recommendations"] }
+          }
+        }
+      ]
+    }
+  ]
+}
